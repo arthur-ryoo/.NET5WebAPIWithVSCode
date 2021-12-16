@@ -33,6 +33,8 @@ namespace _NETWebAPIWithEF
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "_NETWebAPIWithEF", Version = "v1" });
             });
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<ICharacterService, CharacterService>();
         }
 
