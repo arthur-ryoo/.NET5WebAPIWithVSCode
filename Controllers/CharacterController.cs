@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 using _NETWebAPIWithEF.Models;
 using _NETWebAPIWithEF.Services.CharacterService;
 using _NETWebAPIWithEF.Dtos.Character;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _NETWebAPIWithEF.Controllers
 {
-
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CharacterController : ControllerBase
