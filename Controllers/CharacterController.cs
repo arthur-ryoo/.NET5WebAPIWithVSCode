@@ -9,6 +9,7 @@ using _NETWebAPIWithEF.Models;
 using _NETWebAPIWithEF.Services.CharacterService;
 using _NETWebAPIWithEF.Dtos.Character;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace _NETWebAPIWithEF.Controllers
 {
@@ -24,10 +25,13 @@ namespace _NETWebAPIWithEF.Controllers
             _characterService = characterService;
         }
 
+        // Allow single method when adding [Authorize] to the entire controller
+        [AllowAnonymous]
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> Get()
         {
-            return Ok(await _characterService.GetAllCharacters());
+            int id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            return Ok(await _characterService.GetAllCharacters(id));
         }
 
         [HttpGet("{id}")]
